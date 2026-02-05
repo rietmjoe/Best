@@ -10,14 +10,40 @@ body {
   border: none;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.12s ease;
+  position: relative;
+  animation: pulse 1.2s infinite ease-in-out;
 }
 
 #heart.pop {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 #message {
   margin-top: 18px;
   font-size: 20px;
+}
+
+/* Dauer-Pulsieren */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Partikel */
+.particle {
+  position: fixed;
+  font-size: 22px;
+  pointer-events: none;
+  animation: floatUp 900ms ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
 }
