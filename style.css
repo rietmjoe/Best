@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 60px;
+}
+
+#heart {
+  font-size: 120px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s ease;
+}
+
+#heart.pop {
+  transform: scale(1.15);
+}
+
+#message {
+  margin-top: 18px;
+  font-size: 20px;
+}
