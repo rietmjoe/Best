@@ -1,32 +1,107 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 60px;
+:root {
+  --bg1: #0f172a;
+  --bg2: #111827;
+  --card: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.14);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.65);
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
 }
 
-#heart {
-  font-size: 120px;
-  background: transparent;
-  border: none;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 20% 20%, rgba(236, 72, 153, 0.20), transparent 60%),
+    radial-gradient(900px 600px at 80% 30%, rgba(59, 130, 246, 0.18), transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+}
+
+.wrap {
+  width: min(520px, 92vw);
+  padding: 22px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 34px 26px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  margin: 10px 0 26px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.heart {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   cursor: pointer;
   user-select: none;
-  position: relative;
-  animation: pulse 1.2s infinite ease-in-out;
+  font-size: 54px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  transition: transform 140ms ease, background 200ms ease, box-shadow 200ms ease;
+  animation: pulse 1.35s ease-in-out infinite;
 }
 
-#heart.pop {
-  transform: scale(1.2);
+.heart:hover {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
-#message {
-  margin-top: 18px;
+.heart:active {
+  transform: scale(0.98);
+}
+
+.heart.pop {
+  transform: scale(1.10);
+}
+
+.message {
+  min-height: 28px;
+  margin: 22px 0 0;
   font-size: 20px;
+  line-height: 1.25;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
-/* Dauer-Pulsieren */
+.message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+  50% { transform: scale(1.045); }
 }
 
 /* Partikel */
@@ -34,16 +109,19 @@ body {
   position: fixed;
   font-size: 22px;
   pointer-events: none;
-  animation: floatUp 900ms ease-out forwards;
+  will-change: transform, opacity;
+  animation: floatUp 1000ms ease-out forwards;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.35));
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-120px) scale(1.4);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), -140px) scale(1.5); opacity: 0; }
+}
+
+/* etwas schöner auf kleinen Screens */
+@media (max-width: 420px) {
+  h1 { font-size: 34px; }
+  .heart { width: 108px; height: 108px; font-size: 50px; }
+  .message { font-size: 18px; }
 }
