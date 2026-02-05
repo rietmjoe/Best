@@ -24,7 +24,7 @@ function spawnHearts(x, y, count = 10) {
 }
 
 heart.addEventListener("click", (e) => {
-  message.textContent = "Flo, du bisch di best";
+  message.textContent = "Du bisch di best";
 
   // Klick-Position ermitteln (Mitte vom Herz)
   const rect = heart.getBoundingClientRect();
